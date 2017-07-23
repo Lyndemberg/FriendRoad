@@ -26,6 +26,23 @@ function criaDirection(origem, destino, mapa, passagens) {
 
 }
 
+function removePassagem(item){
+	var elemento = "passagem"+item[5];
+	//$("#"+item).remove();
+	$("#"+elemento).remove();
+	passagens.splice(item[5],1);
+	criaDirection(textoOrigem.value, textoDestino.value, map, passagens);
+	
+}
+
+function adicionaPassagemHTML(passagem) {
+	$("#recebePassagens").append("<div id='passagem" + (passagens.length - 1) + "' class='chip'>" + passagem + "<span onclick='removePassagem(this.id)' id='fecha" + (passagens.length - 1) + "' class='closebtn'>&times;</span></div>");
+	//$("#"+passagem+""+passagens.length-1).append("");
+	
+	//$("#recebePassagens").append("<div id=passagem" + (passagens.length - 1) + " class='chip'>"+passagem+"</div>").append( "<span //onclick='removePassagem(this.id)' id=fecha" + (passagens.length - 1) + " class='closebtn'>&times;</span>");
+}
+
+
 
 passagem.onclick = function () {
 	if (textoOrigem.value && textoDestino.value) {
@@ -57,10 +74,11 @@ passagem.onclick = function () {
 							location: inputValue
 						});
 						criaDirection(textoOrigem.value, textoDestino.value, map, passagens);
+						adicionaPassagemHTML(inputValue);
 					}
 				});
 			});
-	}else{
+	} else {
 		sweetAlert("Oops...", "Defina primeiro a origem e destino	", "error");
 	}
 
