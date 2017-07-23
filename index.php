@@ -25,11 +25,9 @@
 
     <div class="container">
         <center><img width="250" class="img-responsive" src="img/logo.png"></center>
-
         <form method="post" action="validaLogin.php" class="form-signin">
             <br>
             <br>
-
             <label for="inputEmail" class="sr-only">Email address</label>
             <input type="email" name="email" id="email" class="form-control" placeholder="E-mail" required autofocus>
             <br>
@@ -43,8 +41,7 @@
 
 
     </div>
-
-
+    
 
 </body>
 </html>

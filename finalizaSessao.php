@@ -21,10 +21,10 @@
   <body>
         <?php    
            if(session_destroy()){
-              echo "sessao encerrada";
+              header("location:index.php");
            }
            else{
-              echo "erro ao sair da sessao";
+              echo "Falha ao sair";
            }
         ?> 
     
