@@ -1,3 +1,28 @@
+
+flatpickr("#dataViagem", {
+	minDate: "today"
+
+});
+flatpickr("#horaViagem", {
+	enableTime: true,
+	noCalendar: true,
+
+	enableSeconds: false, // disabled by default
+
+	time_24hr: false, // AM/PM time picker is used by default
+
+	// default format
+	dateFormat: "H:i",
+
+	// initial values for time. don't use these to preload a date
+	defaultHour: 12,
+	defaultMinute: 0
+
+	// Preload time with defaultDate instead:
+	// defaultDate: "3:30"
+
+});
+
 var map;
 var displayObject = false;
 var passagens = [];
@@ -18,6 +43,23 @@ function criaDirection(origem, destino, mapa, passagens) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			render.setDirections(results);
 			render.setMap(mapa);
+			var rota = results.routes[0];
+			var quantidadeLegs = rota.legs.length;
+			var totalDistancia = null;
+			for (var i = 0; i < quantidadeLegs; i++) {
+				totalDistancia = totalDistancia + rota.legs[i].distance.value;
+			}
+			totalDistancia = totalDistancia / 1000;
+			textoDistancia.value = totalDistancia.toFixed(1);
+			var totalSegundos = null;
+			for (var k = 0; k < quantidadeLegs; k++) {
+				totalSegundos = totalSegundos + rota.legs[k].duration.value;
+			}
+			
+			if(dataViagem.value != "" && horaViagem.value != ""){
+				calculaHoraChegada(totalSegundos);	
+			}
+			
 
 			displayObject = render;
 		}
@@ -26,19 +68,48 @@ function criaDirection(origem, destino, mapa, passagens) {
 
 }
 
-function removePassagem(item){
-	var elemento = "passagem"+item[5];
+dataViagem.onchange = function(){
+	if(horaViagem.value != ""){
+		criaDirection(textoOrigem.value, textoDestino.value, map, passagens);	
+	}
+}
+horaViagem.onchange = function(){
+	if(dataViagem.value != ""){
+		criaDirection(textoOrigem.value, textoDestino.value, map, passagens);	
+	}
+}
+
+function calculaHoraChegada(segundos) {
+	//PEGANDO O VALOR DA DATA DO INPUT E QUEBRANDO
+	var dataInput = dataViagem.value;
+	var ano = dataInput[0] + dataInput[1] + dataInput[2] + dataInput[3];
+	var mes = dataInput[5] + dataInput[6];
+	var dia = dataInput[8] + dataInput[9];
+	//PEGANDO O VALOR DA HORA DO INPUT E QUEBRANDO
+	var horaInput = horaViagem.value;
+	var hora = horaInput[0] + horaInput[1];
+	var minuto = horaInput[3] + horaInput[4];
+
+	var data = new Date(ano, (mes - 1), dia);
+	data.setHours(hora);
+	data.setMinutes(minuto);
+
+	data.setTime(data.getTime() + (segundos * 1000));
+	textoHora.value = data;
+}
+
+function removePassagem(item) {
+	var elemento = "passagem" + item[5];
 	//$("#"+item).remove();
-	$("#"+elemento).remove();
-	passagens.splice(item[5],1);
+	$("#" + elemento).remove();
+	passagens.splice(item[5], 1);
 	criaDirection(textoOrigem.value, textoDestino.value, map, passagens);
-	
 }
 
 function adicionaPassagemHTML(passagem) {
 	$("#recebePassagens").append("<div id='passagem" + (passagens.length - 1) + "' class='chip'>" + passagem + "<span onclick='removePassagem(this.id)' id='fecha" + (passagens.length - 1) + "' class='closebtn'>&times;</span></div>");
 	//$("#"+passagem+""+passagens.length-1).append("");
-	
+
 	//$("#recebePassagens").append("<div id=passagem" + (passagens.length - 1) + " class='chip'>"+passagem+"</div>").append( "<span //onclick='removePassagem(this.id)' id=fecha" + (passagens.length - 1) + " class='closebtn'>&times;</span>");
 }
 
