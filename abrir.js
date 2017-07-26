@@ -1,4 +1,3 @@
-
 flatpickr("#dataViagem", {
 	minDate: "today"
 
@@ -55,11 +54,11 @@ function criaDirection(origem, destino, mapa, passagens) {
 			for (var k = 0; k < quantidadeLegs; k++) {
 				totalSegundos = totalSegundos + rota.legs[k].duration.value;
 			}
-			
-			if(dataViagem.value != "" && horaViagem.value != ""){
-				calculaHoraChegada(totalSegundos);	
+
+			if (dataViagem.value != "" && horaViagem.value != "") {
+				calculaHoraChegada(totalSegundos);
 			}
-			
+
 
 			displayObject = render;
 		}
@@ -68,14 +67,14 @@ function criaDirection(origem, destino, mapa, passagens) {
 
 }
 
-dataViagem.onchange = function(){
-	if(horaViagem.value != ""){
-		criaDirection(textoOrigem.value, textoDestino.value, map, passagens);	
+dataViagem.onchange = function () {
+	if (horaViagem.value != "") {
+		criaDirection(textoOrigem.value, textoDestino.value, map, passagens);
 	}
 }
-horaViagem.onchange = function(){
-	if(dataViagem.value != ""){
-		criaDirection(textoOrigem.value, textoDestino.value, map, passagens);	
+horaViagem.onchange = function () {
+	if (dataViagem.value != "") {
+		criaDirection(textoOrigem.value, textoDestino.value, map, passagens);
 	}
 }
 
@@ -306,6 +305,32 @@ function abrirLocalAtual(position) {
 
 
 }
+
+$('#buttonConfirmar').click(function () {
+
+	$.ajax({
+			method: "POST",
+			url: "recebeCarona.php",
+			data: {
+				origem: textoOrigem.value,
+				destino: textoDestino.value,
+				dataViagem: dataViagem.value,
+				horaViagem: horaViagem.value,
+				distancia: textoDistancia.value,
+				horaChegada: textoHora.value,
+				passagens: JSON.stringify(passagens)
+			}
+		})
+		.done(function (retorno) {
+		alert(retorno);
+			if(retorno == true) {
+				alert("sucesso");
+			}else{
+				alert ("fracasso");
+			}
+		});
+});
+
 
 function loadScript() {
 	var script = document.createElement("script");

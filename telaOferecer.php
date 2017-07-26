@@ -22,7 +22,6 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
 	<script src="https://unpkg.com/flatpickr"></script>
-
 	<style>
 		#mapa {
 			height: 500px;
@@ -41,7 +40,7 @@
 		}
 
 	</style>
-
+	
 </head>
 
 <body>
@@ -49,11 +48,11 @@
 
 		<div class="row">
 			<div class="col-sm-3">
-				<form method="post" class="form-signin">
+			
 					<h4>Origem</h4>
 					<input type="text" name="textoOrigem" id="textoOrigem" class="form-control" disabled><br>
 					<input type="button" name="origem" id="origem" class="btn btn-block" value="Abrir mapa">
-					
+
 					<h4>Destino</h4>
 					<input type="text" name="textoDestino" id="textoDestino" class="form-control" disabled><br>
 					<input type="button" name="destino" id="destino" class="btn btn-block" value="Abrir mapa">
@@ -62,22 +61,22 @@
 
 					</div>
 					<input type="button" name="passagem" id="passagem" class="btn btn-block" value="Adicionar passagem">
-					
+
 					<h4>Data da viagem</h4>
 
-					
-					<input id="dataViagem" name="dataViagem" placeholder="Selecione a Data" type='text' class="form-control" />
-					
 
-					
+					<input id="dataViagem" name="dataViagem" placeholder="Selecione a Data" type='text' class="form-control" />
+
+
+
 					<h4>Hora da saída</h4>
 					<input id="horaViagem" name="horaViagem" placeholder="Selecione a Hora" type='text' class="form-control" />
-					
+
 					<h4>Ajuda de custo</h4>
 					<input class="form-control" type="number" />
 					<br>
-					<button class="btn btn-lg btn-success btn-block" type="submit">Confirmar</button>
-				</form>
+					<button id="buttonConfirmar" class="btn btn-lg btn-success btn-block" type="submit">Confirmar</button>
+				
 			</div>
 
 			<div class="row">
@@ -100,14 +99,12 @@
 
 		</div>
 
-
 	</div>
-
+	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
 	<script type="text/javascript" src="abrir.js"></script>
-
+	
 </body>
 
 </html>
