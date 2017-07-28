@@ -24,8 +24,12 @@ flatpickr("#horaViagem", {
 
 var map;
 var displayObject = false;
+var origemGeo;
+var destinoGeo;
 var passagens = [];
-
+var passagensGeo = [];
+var dataChegada;
+var horaChegada;
 function criaDirection(origem, destino, mapa, passagens) {
 	if (displayObject) {
 		displayObject.setMap(null);
@@ -94,7 +98,8 @@ function calculaHoraChegada(segundos) {
 	data.setMinutes(minuto);
 
 	data.setTime(data.getTime() + (segundos * 1000));
-	textoHora.value = data;
+
+	textoHora.value = data.toLocaleDateString() + " às " + data.toLocaleTimeString();
 }
 
 function removePassagem(item) {
@@ -102,6 +107,7 @@ function removePassagem(item) {
 	//$("#"+item).remove();
 	$("#" + elemento).remove();
 	passagens.splice(item[5], 1);
+	passagensGeo.splice(item[5], 1);
 	criaDirection(textoOrigem.value, textoDestino.value, map, passagens);
 }
 
@@ -143,6 +149,7 @@ passagem.onclick = function () {
 						passagens.push({
 							location: inputValue
 						});
+						passagensGeo.push(results[0].geometry.location);
 						criaDirection(textoOrigem.value, textoDestino.value, map, passagens);
 						adicionaPassagemHTML(inputValue);
 					}
@@ -178,7 +185,9 @@ destino.onclick = function () {
 			}, function (results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					textoDestino.value = inputValue;
+					destinoGeo = results[0].geometry.location;
 					if (textoOrigem.value != "") {
+
 						criaDirection(textoOrigem.value, textoDestino.value, map, passagens);
 					} else {
 						abrirEscolherLocal(results[0].geometry.location);
@@ -227,6 +236,7 @@ origem.onclick = function () {
 						}, function (results, status) {
 							if (status == google.maps.GeocoderStatus.OK) {
 								textoOrigem.value = inputValue;
+								origemGeo = results[0].geometry.location;
 								if (textoDestino.value != "") {
 									criaDirection(textoOrigem.value, textoDestino.value, map);
 								} else {
@@ -276,6 +286,7 @@ function abrirLocalAtual(position) {
 	}, function (results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			textoOrigem.value = results[1].formatted_address;
+			origemGeo = results[0].geometry.location;
 			if (textoDestino.value != null) {
 				criaDirection(textoOrigem.value, textoDestino.value, map);
 			}
@@ -307,30 +318,39 @@ function abrirLocalAtual(position) {
 }
 
 $('#buttonConfirmar').click(function () {
-
 	$.ajax({
 			method: "POST",
 			url: "recebeCarona.php",
 			data: {
 				origem: textoOrigem.value,
 				destino: textoDestino.value,
+				origemGeo: JSON.stringify(origemGeo),
+				destinoGeo: JSON.stringify(destinoGeo),
+				passagensGeo: JSON.stringify(passagensGeo),
+				passagens: JSON.stringify(passagens),
 				dataViagem: dataViagem.value,
 				horaViagem: horaViagem.value,
 				distancia: textoDistancia.value,
 				horaChegada: textoHora.value,
-				passagens: JSON.stringify(passagens)
+				ajuda: ajudaCusto.value,
 			}
 		})
 		.done(function (retorno) {
-		alert(retorno);
-			if(retorno == true) {
-				alert("sucesso");
+			
+			if(retorno == true){
+				swal("Sucesso", "A sua carona foi cadastrada com sucesso!", "success");	
 			}else{
-				alert ("fracasso");
+				
+				swal("Falha", "A sua carona não foi cadastrada", "error");	
 			}
+			
 		});
 });
 
+teste.onclick = function () {
+	alert(passagens);
+
+}
 
 function loadScript() {
 	var script = document.createElement("script");

@@ -73,7 +73,7 @@
 					<input id="horaViagem" name="horaViagem" placeholder="Selecione a Hora" type='text' class="form-control" />
 
 					<h4>Ajuda de custo</h4>
-					<input class="form-control" type="number" />
+					<input class="form-control" id="ajudaCusto" type="number" />
 					<br>
 					<button id="buttonConfirmar" class="btn btn-lg btn-success btn-block" type="submit">Confirmar</button>
 				
@@ -100,7 +100,7 @@
 		</div>
 
 	</div>
-	
+	<button id="teste">TESTAR</button>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="abrir.js"></script>

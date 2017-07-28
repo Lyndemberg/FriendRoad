@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-      
+    <meta charset="utf-8">	
     <script type="text/javascript" src='sweetalert/dist/sweetalert.min.js'></script>
     <link rel='stylesheet' type='text/css' href='sweetalert/dist/sweetalert.css'>
   </head>
@@ -25,7 +25,7 @@ $conexao = open_database();
         $sql = "INSERT INTO usuario (nome,nascimento,sexo,telefone,email,senha)
                 VALUES ('$nome','$nascimento','$sexo','$telefone','$email','$senha')";
         
-        if(mysqli_query($conexao, $sql)){
+        if(pg_query($conexao, $sql)){
             echo    "<script>
                         sweetAlert('Sucesso no cadastro', 'Usuário foi cadastrado com sucesso', 'success');
                         setTimeout(function() { location.href='index.php' }, 3000);
@@ -37,7 +37,8 @@ $conexao = open_database();
                     </script>";
         }
 
-      mysqli_close($conexao);
+	pg_close($conexao);
+     
     }else{
         echo    "<script>
                         sweetAlert('Falha no cadastro', 'Erro na conexão com o banco', 'error');

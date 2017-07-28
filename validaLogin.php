@@ -19,8 +19,8 @@
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $sql = "SELECT * FROM usuario where email='$email' and senha='$senha'";
-    $result = mysqli_query($conexao, $sql);
-    if ($result->num_rows > 0) {
+   	$result = pg_query($conexao, $sql);
+    if (pg_num_rows($result) > 0) {
         $_SESSION['email'] = $email;
         $_SESSION['senha'] = $senha;
         header("location: telaInicial.php");
@@ -32,7 +32,7 @@
         unset ($_SESSION['email']);
         unset ($_SESSION['senha']);   
     }
-    mysqli_close($conexao);
+    pg_close($conexao);
 
 ?>
 
