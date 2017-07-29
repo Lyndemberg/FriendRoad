@@ -33,6 +33,7 @@ if($conexao != null){
 			OR ST_Distance(ST_GeomFromText('POINT($destino)'),p.geom)*40075/360<=20
 			))";
 	$result = pg_query($conexao, $sql);
+	echo "<center><div class='container' style='margin:2%'><h2>Resultado</h2>";
 	echo "
 			<table class='table table-striped'>
 			<thead>
@@ -45,16 +46,16 @@ if($conexao != null){
 					<th>Hora Chegada</th>
 					<th>Distância</th>
 					<th>Passagens</th>
-					
+					<th>Contato</th>
 				</tr>
 			</thead>
 			<tbody>
 	
 	
 	";
-	
+		
 	while ($row = pg_fetch_assoc($result)) {
-		$passagens = null;
+		$passagens=null;
 		echo "<tr>";
 		$usuario = $row['emailusuario'];
       	$data = $row['dataviagem'];
@@ -81,16 +82,27 @@ if($conexao != null){
 		}
 		$sql3 = "SELECT nome FROM passagem WHERE emailusuario='$usuario' AND dataviagem='$data' AND horasaida='$horasaida'";
 		$result3 = pg_query($conexao, $sql3);
-		
-		while($row3 = pg_fetch_assoc($result3)){
-			$passagem = $row3['nome'];
-			$passagens.=" - ".$passagem;
+		if(pg_num_rows($result3)>0){
+			
+			while($row3 = pg_fetch_assoc($result3)){
+				$passagem = $row3['nome'];
+				$passagens.=" - ".$passagem;
+			}
+			
 		}
 		echo "<td>$passagens</td>";
+		$sql4 = "SELECT telefone FROM usuario WHERE email='$usuario'";
+		$result4 = pg_query($conexao,$sql4);
+		
+		while($row4 = pg_fetch_assoc($result4)){
+			$contato = $row4['telefone']; 
+		}
+		echo "<td>$contato</td>";
       	echo "</tr>";
 	}
 	echo "</tbody>
 		</table>";
+	echo "</div></center>";
 	pg_close($conexao);
 }
 
