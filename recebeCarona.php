@@ -1,4 +1,15 @@
 <?php
+
+
+session_start();
+if((!isset ($_SESSION['email']) == true) and (!isset ($_SESSION['senha']) == true)){
+	unset($_SESSION['login']);
+  	unset($_SESSION['senha']);
+  	header('location:index.php');
+}
+$logado = $_SESSION['email'];
+
+
 include("conexao.php");
 
 $origemGeo=$_REQUEST['origemGeo'];
@@ -20,7 +31,7 @@ $horaViagem = $_REQUEST['horaViagem'];
 $distancia = $_REQUEST['distancia'];
 $horaChegada = $_REQUEST['horaChegada'];
 $ajuda = $_REQUEST['ajuda'];
-$email = "lyndemberg@gmail.com";	
+$email = $logado;	
 
 $con = open_database();
 $retorno;
@@ -54,7 +65,7 @@ if($con != null){
 		$retorno = false;
 	}
 }
-
+pg_close($con);
 echo $retorno;
 
 ?>

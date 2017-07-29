@@ -339,18 +339,17 @@ $('#buttonConfirmar').click(function () {
 			
 			if(retorno == true){
 				swal("Sucesso", "A sua carona foi cadastrada com sucesso!", "success");	
-			}else{
+				setTimeout(function(){ window.location.href = "telaInicial.php"; }, 4000);
 				
+				
+				
+			}else{
 				swal("Falha", "A sua carona não foi cadastrada", "error");	
 			}
 			
 		});
 });
 
-teste.onclick = function () {
-	alert(passagens);
-
-}
 
 function loadScript() {
 	var script = document.createElement("script");

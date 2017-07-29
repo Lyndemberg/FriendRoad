@@ -13,7 +13,7 @@
 
 <?php
 include("conexao.php");
-$conexao = open_database();
+	$conexao = open_database();
     if($conexao != null){
         $nome = $_POST['nome'];
         $nascimento = $_POST['nascimento'];

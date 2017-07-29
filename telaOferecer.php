@@ -3,6 +3,18 @@
 <html lang="pt">
 
 <head>
+	<?php
+		session_start();
+        if((!isset ($_SESSION['email']) == true) and (!isset ($_SESSION['senha']) == true)){
+          unset($_SESSION['login']);
+          unset($_SESSION['senha']);
+          header('location:index.php');
+        }
+        $logado = $_SESSION['email'];
+    	include("navbar.php");
+	?>
+	
+	
 	<meta charset="utf-8">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,7 +112,6 @@
 		</div>
 
 	</div>
-	<button id="teste">TESTAR</button>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="abrir.js"></script>
