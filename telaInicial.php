@@ -29,8 +29,12 @@
             <h3>Oferecer Carona</h3>
         </a><br><br>
         <a href="pesquisarOfertas.php" class="btn btn-primary btn-lg">
-            <i style="font-size:40pt" class="fa fa-bars" aria-hidden="true"></i>
+            <i style="font-size:40pt" class="fa fa-search" aria-hidden="true"></i>
             <h3>Pesquisar ofertas</h3>
+        </a><br><br>
+		<a href="minhasCaronas.php" class="btn btn-primary btn-lg">
+            <i style="font-size:40pt" class="fa fa-bars" aria-hidden="true"></i>
+            <h3>Minhas caronas</h3>
         </a>
 
       </center>
