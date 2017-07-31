@@ -85,7 +85,7 @@
 
 
                     <div class="form-group">
-                        <label for="senha" class="cols-sm-2 control-label">Password</label>
+                        <label for="senha" class="cols-sm-2 control-label">Senha</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
@@ -96,7 +96,7 @@
 
 
                     <div class="form-group ">
-                        <button class="btn btn-lg btn-success btn-block" type="submit">Enviar</button>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
 				    </div>
 
                 </form>
