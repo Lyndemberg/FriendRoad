@@ -28,12 +28,12 @@ include("conexao.php");
         if(pg_query($conexao, $sql)){
             echo    "<script>
                         sweetAlert('Sucesso no cadastro', 'Usuário foi cadastrado com sucesso', 'success');
-                        setTimeout(function() { location.href='index.php' }, 3000);
+                        setTimeout(function() { location.href='index.php' }, 2000);
                     </script>";
         }else{
             echo    "<script>
                         sweetAlert('Falha no cadastro', 'Usuário já existe', 'error');
-                        setTimeout(function() { window.history.back(); }, 3000);
+                        setTimeout(function() { window.history.back(); }, 2000);
                     </script>";
         }
 
@@ -42,7 +42,7 @@ include("conexao.php");
     }else{
         echo    "<script>
                         sweetAlert('Falha no cadastro', 'Erro na conexão com o banco', 'error');
-                        setTimeout(function() { window.history.back(); }, 3000);
+                        setTimeout(function() { window.history.back(); }, 2000);
                 </script>";
     }
 

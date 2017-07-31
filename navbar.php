@@ -26,8 +26,8 @@
             </div>
             <ul class="nav navbar-nav">
               <li class="active"><a href="telaInicial.php">Pagina Inicial</a></li>
-              <li><a href="telaPerfil.php">Perfil</a></li>
-              <li><a href="finalizaSessao.php">Logout</a></li>
+				
+				<li><a href="finalizaSessao.php">Logout</a></li>
             </ul>
         </div>
       </nav>

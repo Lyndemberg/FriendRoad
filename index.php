@@ -33,7 +33,7 @@
 				</div>
 				<div class="col-sm-4">
 					<form method="post" action="validaLogin.php" class="form-signin">
-						<center><img width="250" src="img/logo.png"></center>
+						<center><img src="img/logo2.png"></center>
 						<br>
 						<br>
 						<input type="email" name="email" id="email" class="form-control" placeholder="E-mail" required autofocus>
@@ -41,7 +41,7 @@
 
 						<input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" required>
 						<br>
-						<button class="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 						<button class="btn btn-lg btn-basic btn-block" type="button" onclick="location.href='telaCadastro.php'">Cadastro</button>
 					</form>
 				</div>

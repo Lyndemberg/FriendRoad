@@ -339,7 +339,7 @@ $('#buttonConfirmar').click(function () {
 			
 			if(retorno == true){
 				swal("Sucesso", "A sua carona foi cadastrada com sucesso!", "success");	
-				setTimeout(function(){ window.location.href = "telaInicial.php"; }, 4000);
+				setTimeout(function(){ window.location.href = "telaInicial.php"; }, 2000);
 				
 				
 				
