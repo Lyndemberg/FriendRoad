@@ -73,8 +73,8 @@
 
 				}
 				echo "<td>$passagens</td>";
-				echo "<td><a href='deletarCarona.php?data=$data&hora=$horasaida'>Deletar</a></td>";
-			
+				echo "<td><a class='btn btn-danger' href='deletarCarona.php?data=$data&hora=$horasaida'>Deletar</a></td>";
+				echo "<td><a class='btn btn-warning' href='atualizarCarona.php?data=$data&hora=$horasaida'>Atualizar</a></td>";
 				echo "</tr>";
 				
 		}
