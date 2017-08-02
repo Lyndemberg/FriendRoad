@@ -270,7 +270,7 @@
 				region: "br"
 			}, function (results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
-					textoOrigem.value = results[1].formatted_address;
+					textoOrigem.value = results[0].formatted_address;
 					origemGeo = results[0].geometry.location.lat() + " " + results[0].geometry.location.lng();
 					if (textoDestino.value != null) {
 						criaDirection(textoOrigem.value, textoDestino.value, map);

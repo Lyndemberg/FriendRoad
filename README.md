@@ -6,3 +6,4 @@
 - HTML/JavaScript/CSS
 - Google Maps JavaScript API
 - PostgreSQL
+- PostGIS
